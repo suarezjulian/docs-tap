@@ -121,6 +121,7 @@ To install any package from the Tanzu Application Platform package repository:
     + [Install Supply Chain Security Tools - Sign](#install-scst-sign)
     + [Install Supply Chain Security Tools - Scan](#install-scst-scan)
     + [Install API portal](#install-api-portal)
+    + [Install Convention Service](#install-convention-service)
 
 
 ## <a id='install-cnr'></a> Install Cloud Native Runtimes
@@ -711,6 +712,41 @@ To install Supply Chain Security Tools - Scan (Grype Scanner):
    ```
 
 5. Visit [API portal for VMware Tanzu](https://docs.pivotal.io/api-portal/1-0/) for more information about API portal.
+
+## <a id='install-convention-service'></a> Install Convention Service 
+
+To install Convention Service:
+
+**Prerequisite**: Cert-manager installed on the cluster.
+For how to install cert-manager,
+see [Install Cert-Manager](https://docs-staging.vmware.com/en/VMware-Tanzu-Application-Platform/0.2/tap-0-2/GUID-install-general.html)
+
+1. Follow the instructions in [Install Packages](#install-packages) above.
+
+2. Install the package:
+    ```
+    $ tanzu package install convention-controller -p controller.conventions.apps.tanzu.vmware.com -v 0.4.2 -n tap-install
+    | Retrieving installation details for convention-controller...
+    NAME:                    convention-controller
+    PACKAGE-NAME:            controller.conventions.apps.tanzu.vmware.com
+    PACKAGE-VERSION:         0.4.2
+    STATUS:                  Reconcile succeeded
+    CONDITIONS:              [{ReconcileSucceeded True  }]
+    USEFUL-ERROR-MESSAGE:
+    ```
+
+3. Verify the package install by running:
+    
+    ```
+    kubectl get pods -n conventions-system 
+    ```
+    For example:
+    ```
+    $ kubectl get pods -n conventions-system
+    NAME                                             READY   STATUS    RESTARTS   AGE
+    conventions-controller-manager-596c65f75-j9dmn   1/1     Running   0          72s
+    ```
+    STATUS should be Running.
 
 ## <a id='verify'></a> Verify the Installed Packages
 

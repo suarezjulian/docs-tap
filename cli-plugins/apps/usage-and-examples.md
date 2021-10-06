@@ -39,7 +39,7 @@ Once the workload has been successfully created, you can tail the workload to vi
 1. Check logs by running:
 
     ```sh
-    tanzu apps workload tail pet-clinic --since 10m --timestamps
+    tanzu apps workload tail pet-clinic --since 10m --timestamp
     ```
 
     Where:
